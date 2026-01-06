@@ -38,29 +38,52 @@ Include a data dictionary to explain the meaning of each variable or field in th
 ## Executive Summary
 
 ### Data Cleaning Steps
-Outline the steps taken to clean and preprocess the data before analysis.
+To clean the data, I first checked for missing values and looked at the distribution of the columns that have NaN values. Only one column had missing values, and it was a very right skewed distribution. After determining that there outliers were valid, I used the median to impute the missing values. Prior to that though, I created a new column that provided a missingness flag, so that the machine learning models would know that these values were originally missing and imputed. 
+
+I also created new columns to create groups for departure/arrival delays as well as age groups for further analysis. 
 
 ### Key Visualizations
-Include key visualizations that highlight important aspects of the data. Use graphs, charts, or any other visual representation to make your points.
 
-#### Visualization 1: [Title]
-[Description and interpretation of the first visualization.]
+#### Visualization 1: [Departure Delay Group by Satisfaction]
+This countplot shows that as the delays get bigger, customer satisfaction decreases.
 
-![Visualization 1](path/to/image1.png)
+We see that all the groups, even flights that are on time, the dissatisfaction is greater than the satisfaction. This tells us that when there is no delay, there is minimal affect on satisfaction. However, as the delay gets greater and greater, the difference between satisfied customers and dissatisfied customers grows. 
 
-#### Visualization 2: [Title]
-[Description and interpretation of the second visualization.]
+We see this in `very large delay`, where the number of dissatisfied customers nearly doubles that of satisfied customers. 
 
-![Visualization 2](path/to/image2.png)
+![Visualization 1](./images/depart_sat.png)
+
+#### Visualization 2: [Age Group by Satisfaction]
+The below pie charts show how different age groups rate their overall flight experience. We see that adults (bottom left) have the highest proportion of satisfied passengers, but still have more dissatisfaction than satisfaction. 
+
+A potential cause of this could be empathy. It may be that adults are more likely to empathize with the difficulties faced and therefore are not as easily upset compared to children and seniors, or may be more likely to express their dissatisfaction.
+
+![Visualization 2](./images/age_group_pie.png)
 
 ## Conclusions/Recommendations
-Summarize the main findings from your analysis. If applicable, provide recommendations based on the insights gained from the data.
+I trained multiple models to generate predictions of satisfaction or dissatisfaction. Specifcally, I trained a Logistic Regression model, a Random Forest model, and a K Nearest Neighbors (KNN) model. 
+
+The results are below. 
+
+| Model | Accuracy Score |
+| ----- | -------------- |
+| Logistic Regression | 87.54% |
+| Random Forest | 96.06% |
+| KNN | 92.79% |
+
+The Random Forest was the most accurate out of the 3 models. 
+
+### Confusion Matrix
+
+![confusion matrix](./images/rf_conf.png)
+
+We can see that the random forest model also has a very good confusion matrix, getting less than 1000 wrong predictions in either satisfied or dissatsified classfiications across the entire dataset. 
+
+### ROC Curve
+
+![roc auc curve](./images/rf_roc.png)
+
+This ROC curve shows that the model separates the classes very well, as indicated by the steep rise near the y-axis. This means the model achieves a high true positive rate while maintaining a low false positive rate across a range of thresholds
 
 ## Additional Information
 Include any additional information, references, or resources that might be relevant for understanding the analysis.
-
----
-
-Feel free to replace the placeholders with your actual content. Additionally, if you have images for your visualizations, make sure to replace the placeholder paths with the correct file paths or URLs.
-
-Once you've filled in the content, save the file with a `.md` extension (e.g., `README.md`). You can use this Markdown file on platforms like GitHub to provide a well-structured README for your analysis.
