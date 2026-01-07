@@ -60,6 +60,8 @@ A potential cause of this could be empathy. It may be that adults are more likel
 
 ![Visualization 2](./images/age_group_pie.png)
 
+For more visualizations, please see [EDA Notebook](./EDA.ipynb)
+
 ## Conclusions/Recommendations
 I trained multiple models to generate predictions of satisfaction or dissatisfaction. Specifcally, I trained a Logistic Regression model, a Random Forest model, and a K Nearest Neighbors (KNN) model. 
 
@@ -71,7 +73,7 @@ The results are below.
 | Random Forest | 96.06% |
 | KNN | 92.79% |
 
-The Random Forest was the most accurate out of the 3 models. 
+The Random Forest model was the most accurate out of the 3 models. 
 
 ### Confusion Matrix
 
@@ -84,6 +86,12 @@ We can see that the random forest model also has a very good confusion matrix, g
 ![roc auc curve](./images/rf_roc.png)
 
 This ROC curve shows that the model separates the classes very well, as indicated by the steep rise near the y-axis. This means the model achieves a high true positive rate while maintaining a low false positive rate across a range of thresholds
+
+### Main Insights
+
+Based on the exploratory data analysis, passenger satisfaction rarely appears to stem from a single service area; instead, it is often the result of shortcomings across multiple areas. The data show that even when passengers rated a particular service area highly (5/5), many still reported overall dissatisfaction. This suggests that strong performance in a few areas is not sufficient to ensure satisfaction if other aspects of the experience fall short.
+
+Consequently, airlines should aim to improve the passenger experience holistically. Weakness in any single service area can negatively impact overall satisfaction, even when other areas perform well.
 
 ## Additional Information
 Include any additional information, references, or resources that might be relevant for understanding the analysis.
